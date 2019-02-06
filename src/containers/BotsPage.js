@@ -5,38 +5,46 @@ import YourBotArmy from './YourBotArmy'
 class BotsPage extends React.Component {
 
   state = {
-    bots: [],
-    selectedBots: []
+    bots: []
   }
 
   componentDidMount() {
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
     .then(res => res.json())
     .then(bots => {
-      bots.forEach(bot => bot.selected = false)
       this.setState({bots})
     })
   }
 
   addToSelectedBots = (bot) => {
-    if(!bot.selected){
-      bot.selected = true
-      this.setState({
-        selectedBots: [...this.state.selectedBots, bot]
+    this.setState({
+      bots: this.state.bots.map(thisbot => {
+        if(bot.id === thisbot.id) {
+          thisbot.selected = true
+          return thisbot
+        }
+        return thisbot
       })
-    }
+    })
   }
+
 
   removeFromSelectedBots = (bot) => {
     this.setState({
-      selectedBots: this.state.selectedBots.splice(this.state.selectedBots.indexOf(bot),1)
+      bots: this.state.bots.map(thisbot => {
+        if(bot.id === thisbot.id) {
+          thisbot.selected = false
+          return thisbot
+        }
+        return thisbot
+      })
     })
   }
 
   render() {
     return (
       <div>
-        <YourBotArmy bots={this.state.selectedBots} addToSelectedBots={this.addToSelectedBots} removeFromSelectedBots={this.removeFromSelectedBots} />
+        <YourBotArmy removeFromSelectedBots={this.removeFromSelectedBots} bots={this.state.bots.filter(bot => bot.selected === true)}/>
         <BotCollection addToSelectedBots={this.addToSelectedBots} bots={this.state.bots} />
       </div>
     );

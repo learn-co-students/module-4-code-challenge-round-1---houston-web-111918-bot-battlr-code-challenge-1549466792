@@ -18,13 +18,21 @@ const BotCard = props => {
     default:
       botType = <div />;
   }
-  
+
+  let func
+  if(!bot.selected) {
+    func = () => props.addToSelectedBots(bot)
+  } else if(props.removeFromSelectedBots) {
+    func = () => props.removeFromSelectedBots(bot)
+  }
+
+
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => props.addToSelectedBots(bot)}
+        onClick={func}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
