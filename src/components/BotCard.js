@@ -19,12 +19,18 @@ const BotCard = props => {
       botType = <div />;
   }
 
+  let func = () => props.show(bot)
+  if(props.removeFromSelectedBots) {
+    func = () => props.removeFromSelectedBots(bot)
+  }
+
+
   return (
     <div className="ui column">
       <div
         className="ui card"
         key={bot.id}
-        onClick={() => console.log("add code to connect event listener")}
+        onClick={func}
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
