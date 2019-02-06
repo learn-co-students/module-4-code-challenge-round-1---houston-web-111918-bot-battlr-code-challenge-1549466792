@@ -7,17 +7,9 @@ import BotCard from "../components/BotCard";
 class BotCollection extends React.Component {
   //your code here
 
-	// state = {
-	// 	inArmy: false,
-	// 	army: []
-	// }
+
 	
-	handleClick = (bot) => {
-		this.setState({
-			inArmy: true,
-			army: [...this.state.army, bot]
-		})
-	}
+	
 
   render(){
 		// console.log(this.state.army)
@@ -26,7 +18,7 @@ class BotCollection extends React.Component {
   	  <div className="ui four column grid">
     		<div className="row">
 				{this.props.bots.map( bot => (
-          <BotCard key={bot.id} bot={bot} handleClick={this.handleClick}/>
+          <BotCard key={bot.id} bot={bot} handleClick={this.props.handleClick}/>
         ))}
     		  Collection of all bots
     		</div>

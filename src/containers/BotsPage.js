@@ -13,6 +13,12 @@ class BotsPage extends React.Component {
 		army: []
   }
 
+  handleClick = (bot) => {
+		this.setState({
+			inArmy: true,
+			army: [...this.state.army, bot]
+		})
+	}
 
   componentDidMount(){
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
@@ -27,11 +33,11 @@ class BotsPage extends React.Component {
   
 
   render() {
-    // console.log(army)
+    console.log(this.state.army)
     return (
       <div>
         <YourBotArmy />
-        <BotCollection bots={this.state.bots} />
+        <BotCollection bots={this.state.bots} handleClick={this.handleClick}/>
         
        
        
