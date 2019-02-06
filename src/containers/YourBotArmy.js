@@ -4,6 +4,10 @@ import BotCard from "../components/BotCard";
 class YourBotArmy extends React.Component {
   //your bot army code here...
 
+  state = {
+    inArmy: true
+  }
+  
   render(){
     return (
       <div className="ui segment inverted olive bot-army">
