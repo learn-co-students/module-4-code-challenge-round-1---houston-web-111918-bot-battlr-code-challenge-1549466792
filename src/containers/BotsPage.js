@@ -8,8 +8,9 @@ class BotsPage extends React.Component {
   //start here with your code for step one
 
   state = {
-    bots: []
-
+    bots: [],
+    inArmy: false,
+		army: []
   }
 
 

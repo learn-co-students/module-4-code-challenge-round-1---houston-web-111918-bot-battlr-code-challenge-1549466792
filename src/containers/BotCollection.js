@@ -7,10 +7,10 @@ import BotCard from "../components/BotCard";
 class BotCollection extends React.Component {
   //your code here
 
-	state = {
-		inArmy: false,
-		army: []
-	}
+	// state = {
+	// 	inArmy: false,
+	// 	army: []
+	// }
 	
 	handleClick = (bot) => {
 		this.setState({
@@ -20,7 +20,7 @@ class BotCollection extends React.Component {
 	}
 
   render(){
-		console.log(this.state.army)
+		// console.log(this.state.army)
   	return (
 			
   	  <div className="ui four column grid">
