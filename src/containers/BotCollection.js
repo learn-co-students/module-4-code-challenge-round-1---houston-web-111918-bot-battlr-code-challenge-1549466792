@@ -12,7 +12,7 @@ class BotCollection extends React.Component {
   	  <div className="ui four column grid">
     		<div className="row">
 				 {this.props.bots.map( (bot) =>
-					 <BotCard key={bot.id} bot={bot} selected={this.props.selected} />
+					 <BotCard key={bot.id} bot={bot} toggle={this.props.onEnlist} />
 				 )}
     		</div>
   	  </div>

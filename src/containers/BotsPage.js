@@ -1,3 +1,4 @@
+
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from "./YourBotArmy";
@@ -6,10 +7,6 @@ class BotsPage extends React.Component {
   
   state = {
     allBots: [],
-    enlistedBots: [
-      
-      {id: 102, name: "RyM-66", health: 86}
-    ]
   }
 
   componentDidMount = () => {
@@ -21,42 +18,37 @@ class BotsPage extends React.Component {
   }
 
 
-
-
-  onSelectEnlisted = (bot) => {
-    // let enlistedBots = [...this.state.enlistedBots]
-
-    let enlist = this.state.enlistedBots.map(  (eBot) => {
-      if (eBot.id !== bot.id) {
-        console.log(eBot, bot)
-        return {eBot, bot}
+  updateElementsInArray = (array, id, values) => {
+    return array.map( element => {
+      if (element.id === id) {
+        return { ...element, ...values }
+      } else {
+        return element
       }
-      else {
-        console.log(eBot)
-        return {eBot}
-      }
-    })
-
-    // this.setState({
-    //   enlistedBots: enlist
-    // })
-   
-
-
+  })
   }
-      
 
-  
- 
-   
+  onEnlist = (bot) => {
+    let newState = this.updateElementsInArray(this.state.allBots, bot.id, {enlisted: true})
+    this.setState({
+      allBots: newState 
+    })
+  }
 
- 
+  onDelist = (bot) => {
+    let newState = this.updateElementsInArray(this.state.allBots, bot.id, {enlisted: false})
+    this.setState({
+      allBots: newState 
+    })
+  }
 
   render() {
+    let enlisted = this.state.allBots.filter( (bot) => (bot.enlisted === true) )
+
     return (
       <div>
-        <YourBotArmy bots={this.state.enlistedBots}/>
-        <BotCollection bots={this.state.allBots} selected={this.onSelectEnlisted}/>
+        <YourBotArmy bots={enlisted} onDelist={this.onDelist} />
+        <BotCollection bots={this.state.allBots} onEnlist={this.onEnlist}/>
       </div>
     );
   }
@@ -64,3 +56,29 @@ class BotsPage extends React.Component {
 }
 
 export default BotsPage;
+
+// onSelectEnlisted = (bot) => {
+
+  //   let enlistedBots = [...this.state.enlistedBots]
+  //   let enlist = []
+    
+  //   enlist = this.state.enlistedBots.map(  (eBot) => {
+  //     // console.log(eBot.id !== bot.id)
+  //     if (eBot.id !== bot.id) {
+  //       enlistedBots.push({...bot})
+  //     }
+      
+  //    return enlistedBots
+  //   })
+
+  //   console.log(enlistedBots)
+  //   // console.log(enlisted)
+   
+ 
+  //   this.setState({
+  //     enlistedBots: [enlistedBots]
+  //   })
+
+  //   // console.log(this.state.enlistedBots)
+   
+	// }

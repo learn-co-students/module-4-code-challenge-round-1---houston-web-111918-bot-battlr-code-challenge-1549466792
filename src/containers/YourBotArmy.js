@@ -13,7 +13,7 @@ class YourBotArmy extends React.Component {
             Your Bot Army
 
             {this.props.bots.map( (bot) =>
-					    <BotCard bot={bot}  />
+					    <BotCard bot={bot} toggle={this.props.onDelist} />
 				    )}
           </div>
         </div>
