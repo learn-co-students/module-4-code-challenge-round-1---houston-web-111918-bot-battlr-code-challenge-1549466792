@@ -1,11 +1,13 @@
 import React from "react";
 import BotCollection from './BotCollection'
 import YourBotArmy from './YourBotArmy'
+import BotSpecs from '../components/BotSpecs'
 
 class BotsPage extends React.Component {
 
   state = {
-    bots: []
+    bots: [],
+    show: null
   }
 
   componentDidMount() {
@@ -41,11 +43,33 @@ class BotsPage extends React.Component {
     })
   }
 
+  show = (bot) => {
+    console.log('showbot', bot)
+    this.setState({
+      show: bot
+    })
+  }
+
+  hide = () => {
+    this.setState({
+      show: null
+    })
+  }
+
+
   render() {
+
+    let div
+    if(this.state.show) {
+      div = <BotSpecs bot={this.state.show} hide={this.hide} addToSelectedBots={this.addToSelectedBots} />
+    } else {
+      div = <BotCollection show={this.show} addToSelectedBots={this.addToSelectedBots} bots={this.state.bots} />
+    }
+
     return (
       <div>
         <YourBotArmy removeFromSelectedBots={this.removeFromSelectedBots} bots={this.state.bots.filter(bot => bot.selected === true)}/>
-        <BotCollection addToSelectedBots={this.addToSelectedBots} bots={this.state.bots} />
+        {div}
       </div>
     );
   }

@@ -19,10 +19,8 @@ const BotCard = props => {
       botType = <div />;
   }
 
-  let func
-  if(!bot.selected) {
-    func = () => props.addToSelectedBots(bot)
-  } else if(props.removeFromSelectedBots) {
+  let func = () => props.show(bot)
+  if(props.removeFromSelectedBots) {
     func = () => props.removeFromSelectedBots(bot)
   }
 
