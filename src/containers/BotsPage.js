@@ -9,17 +9,23 @@ class BotsPage extends React.Component {
 
   state = {
     bots: [],
-    inArmy: false,
-		army: []
+    army: []
   }
 
-  handleClick = (bot) => {
+  handleClick = (selectedBot) => {
 		this.setState({
-			inArmy: true,
-			army: [...this.state.army, bot]
+      army: [selectedBot, ...this.state.army],
+      bots: this.state.bots.filter( bot => bot != selectedBot)
 		})
-	}
-
+  }
+  
+  onClick = (selectedBot) => {
+    this.setState({
+      bots: [selectedBot, ...this.state.bots],
+      army: this.state.army.filter( bot => bot != selectedBot)
+    })
+  }
+    
   componentDidMount(){
     fetch('https://bot-battler-api.herokuapp.com/api/v1/bots')
     .then(res => res.json())
@@ -28,19 +34,13 @@ class BotsPage extends React.Component {
     }))
   }
 
-  
-
-  
-
   render() {
     console.log(this.state.army)
     return (
       <div>
-        <YourBotArmy />
+
+        <YourBotArmy bots={this.state.army} handleClick={this.onClick}/>
         <BotCollection bots={this.state.bots} handleClick={this.handleClick}/>
-        
-       
-       
       </div>
     );
   }
