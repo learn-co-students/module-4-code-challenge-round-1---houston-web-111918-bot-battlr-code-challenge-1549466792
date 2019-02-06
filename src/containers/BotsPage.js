@@ -6,7 +6,7 @@ import YourBotArmy from "./YourBotArmy";
 class BotsPage extends React.Component {
   
   state = {
-    allBots: [],
+    allBots: []
   }
 
   componentDidMount = () => {
@@ -29,6 +29,7 @@ class BotsPage extends React.Component {
   }
 
   onEnlist = (bot) => {
+    
     let newState = this.updateElementsInArray(this.state.allBots, bot.id, {enlisted: true})
     this.setState({
       allBots: newState 
@@ -41,6 +42,8 @@ class BotsPage extends React.Component {
       allBots: newState 
     })
   }
+
+ 
 
   render() {
     let enlisted = this.state.allBots.filter( (bot) => (bot.enlisted === true) )

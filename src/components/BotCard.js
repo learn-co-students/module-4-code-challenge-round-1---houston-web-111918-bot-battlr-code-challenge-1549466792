@@ -24,6 +24,7 @@ const BotCard = props => {
       <div
         className="ui card"
         key={bot.id}
+        // onClick={() => { props.toggle(bot) }}
         onClick={() => { props.toggle(bot) }}
       >
         <div className="image">
